@@ -1,0 +1,14 @@
+
+build/
+.cache/
+.devcontainer/
+
+.vscode/
+
+*.o
+*.obj
+*.out
+*.exe
+
+*.zip
+*.rar
