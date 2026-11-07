@@ -1,29 +1,27 @@
-# C++ Advanced Data Structures: Custom Dictionary & Variant Visitors
+# Dictionary and std::variant visitors
 
-This repository features a custom implementation of a Dictionary data structure and the application of modern C++17 design patterns, specifically the Visitor pattern with `std::variant`.
+[![CI](https://github.com/Loomwixx/cpp-dictionary-structures/actions/workflows/ci.yml/badge.svg)](https://github.com/Loomwixx/cpp-dictionary-structures/actions/workflows/ci.yml)
 
-## Key Features Demonstrated
+A dictionary class written from scratch, holding values of several types through `std::variant`.
 
-### 1. Custom Dictionary Implementation
-* **Memory Management & Constructors:** Implemented robust constructors, destructors, and memory handling. Supports modern C++ initialization via `std::initializer_list`.
-* **Operator Overloading:** Deeply integrated into the language through overloaded operators for Array access (`operator[]`), Concatenation, and Const-correctness.
-* **Data Manipulation:** Developed core dictionary methods for extracting Keys, Values, and popping elements.
-* **Instance Tracking:** Includes static object counting mechanisms to track active dictionary instances and prevent memory leaks.
+## What's inside
 
-### 2. Modern C++17 Patterns (`std::variant`)
-* **Visitor Pattern:** Implemented custom visitors (`PrintVisitor`, `ToStringVisitor`) utilizing `std::visit` to cleanly process and serialize multiple data types stored in `std::variant`.
-* **Data Serialization:** Added functionality to convert dictionary states and variant data into JSON format (`ToJson`).
+- Constructors, destructor and copy/move semantics, plus construction from `std::initializer_list`
+- Operators: `operator[]`, concatenation, const-correct access
+- `keys()`, `values()`, `pop()`
+- A static counter of live instances, used to check that nothing leaks
+- Visitors for `std::visit` (`PrintVisitor`, `ToStringVisitor`) and JSON export
 
-## Comprehensive Unit Testing
-The project is thoroughly tested using **GoogleTest (GTest)**, validating all edge cases including:
-* Operator logic and const-correctness.
-* Memory stability and instance counting.
-* Visitor pattern execution and JSON serialization.
+## Build and run
 
-## Build Instructions
+Requires CMake 3.24+ and GCC 13 (the code uses C++23). GoogleTest is downloaded automatically.
+
 ```bash
-mkdir build
-cd build
-cmake ..
-cmake --build .
-ctest -V
+cmake -B build
+cmake --build build
+ctest --test-dir build --output-on-failure
+```
+
+## Context
+
+Written as a lab for the Programming Languages II course at AGH University of Krakow. The task specification and the GoogleTest suite were provided by the course; the implementation is mine. The code builds with `-Wall -Wextra -Werror` and a long list of extra warnings, and is formatted with clang-format.
